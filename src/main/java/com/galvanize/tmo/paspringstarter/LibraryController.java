@@ -44,7 +44,7 @@ public class LibraryController {
 
         Collections.sort(entities, bookComparator);
 
-        outer.put("Books", entities);
+        outer.put("books", entities);
         return outer.toString();
     }
 
@@ -54,7 +54,7 @@ public class LibraryController {
         bookId += 1;
         newBook.setId(bookId);
         bookList.add(newBook);
-        return new ResponseEntity<>(newBook.toString(), HttpStatus.CREATED);
+        return new ResponseEntity<>(newBook.toJSON().toString(), HttpStatus.CREATED);
     }
 
     @DeleteMapping("/api/books")
