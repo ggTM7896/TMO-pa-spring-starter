@@ -1,0 +1,173 @@
+how-to-build-pa-starter-backend
+
+Go into gitbash window, and clone TMO's pa-spring-starter repo:
+
+$ git clone https://github.com/gSchool/TMO-pa-spring-starter
+
+$ cd TMO-pa-spring-starter
+
+$ git status
+On branch main
+Your branch is up to date with 'origin/main'.
+
+nothing to commit, working tree clean
+
+$ cat README.md
+# Pre-Assessment Spring Starter
+
+## Usage
+This starter utilizes Gradle as its build tool. After cloning and cd'ing
+into its directory, open the the project in your IDE of choice.
+IntelliJ Idea Community Edition is recommended, however you may
+wish to use Visual Code Studio if it is set up for Java development
+with the correct extensions.
+
+Please refer to the [Gradle Wrapper docs]
+ https://docs.gradle.org/current/userguide/gradle_wrapper.html
+
+for further info on building, running, and testing the application.
+
+Simple use cases will involve these commands:
+- `./gradlew bootRun` to start the Tomcat server with your application
+- `./gradlew test -i` in order to run your tests and see the output in the terminal
+- `./gradlew build` to create a build of the application for use in web server or deployment
+
+You can leverage the UI in your IDE to run these tasks as well.
+
+$ ./gradlew build
+
+Welcome to Gradle 7.0.2!
+
+Here are the highlights of this release:
+ - File system watching enabled by default
+ - Support for running with and building Java 16 projects
+ - Native support for Apple Silicon processors
+ - Dependency catalog feature preview
+
+For more details see https://docs.gradle.org/7.0.2/release-notes.html
+
+Starting a Gradle Daemon, 1 incompatible Daemon could not be reused, use --status for details
+
+> Task :test
+2021-12-28 11:29:40.338  INFO 32180 --- [extShutdownHook] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+
+BUILD SUCCESSFUL in 23s
+6 actionable tasks: 6 executed
+
+------
+
+I want to use the JPA data repository that is supplied by springframework.
+I had to add the following line to the 'dependencies' section of build.gradle:
+
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+
+
+Victor said that if you use JPA, you need an underlying database
+for JPA, you need H2, which is an in-memory database.
+you could also use SQL or SQLite.
+
+You have to implement this if you want the repository classes to work.
+
+when I rebuild the application from eclipse, how can I get it to stop the running application before rebuilding and rerunning it?
+
+Hernandez Salazar, Victor  6:28 PM
+There should be a red stop button in the server tab..or at the top left of the screen
+6:28
+If not, youll have to kill the process using the netstat command
+6:31
+netstat -aon  | find  "8080"
+6:31
+then kill the process by id with taskkill command
+6:31
+taskkill /f /pid 12345
+6:32
+12345 is the process id given by the netstat command for port "8080"
+6:32
+not sure why sometimes eclipse doesn't provide the stop button for spring apps.
+
+EXAMPLE: Kill a server process
+
+C:\Users\GGoslen1>netstat -aon | find "8080"
+  TCP    0.0.0.0:8080           0.0.0.0:0              LISTENING       32080
+  TCP    [::]:8080              [::]:0                 LISTENING       32080
+  TCP    [::1]:8080             [::1]:59568            TIME_WAIT       0
+  TCP    [::1]:59567            [::1]:8080             TIME_WAIT       0
+
+C:\Users\GGoslen1>taskkill /f /pid 32080
+SUCCESS: The process with PID 32080 has been terminated.
+
+
+-------------------------------------------------------------------
+Now I want to push my changes to my own github repository.
+First, I'll need to clone TMO's pa-spring-starter repo into my own repo.
+Then, I'll copy in the changes I made to the files.
+Then, I'll check those into my own repo.
+
+--------------------------------------------------------------------
+
+Go into your own github repository
+
+https://github.com/
+
+I am signed in as user: ggTM7896
+
+Add a repository under ggTM7896
+
+ggTM7896/TMO-pa-react-starter
+ggTM7896/TMO-pa-spring-starter  <-- add this
+
+Click "New", then enter the Repository Name,
+click "Public",
+then click "Create repository"
+
+then click "import code" to import code from another repository
+
+Enter your old repository's clone URL
+https://github.com/gSchool/TMO-pa-spring-starter
+
+then click "Begin Import"
+
+Importing Complete! Your new repository ggTM7896/TMO-pa-spring-starter is ready.
+
+---------------------------------------------------------------------------------
+Now check out this repository into your own sandbox
+
+First, go into gitBash and navigate to your sandbox:
+#  /c/Users/GGoslen1/OneDrive - T-Mobile USA/Development/ETS_SWE_Bootcamp/PreTest  <-- not here. won't work.
+
+My first attempt at this didn't work.
+checking out the project into a directory backed up by OneDrive
+turned out to be a disaster. From the "com" subdirectory on down,
+it would not allow me to cd to it or change anything in it.
+it wouldn't even let me delete it!
+
+so go up a level higher, above OneDrive, just like I did for the front end project
+
+/c/Users/GGoslen1
+
+$ mkdir TMO-pa-spring-starter-01
+
+$ cd TMO-pa-spring-starter-01
+
+$ git init
+
+$ git clone https://github.com/ggTM7896/TMO-pa-spring-starter
+
+$ cd TMO-pa-spring-starter
+
+$ pwd
+/c/Users/GGoslen1/TMO-pa-spring-starter-01/TMO-pa-spring-starter
+
+$ git status
+On branch main
+Your branch is up to date with 'origin/main'.
+
+nothing to commit, working tree clean
+
+-------------------
+
+At this point, I copied in the changes I made in my other copy
+of the pa-spring-starter repository, and checked these in
+as my first revision of the project in my version of the
+pa-spring-starter repository.
+
