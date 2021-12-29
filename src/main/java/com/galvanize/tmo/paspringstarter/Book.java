@@ -13,11 +13,11 @@ class Book implements java.lang.Comparable<Book> {
  	private Long id;
 	private String title;
 	private String author;
-	private String yearPublished;
+	private Long yearPublished;
 
 	Book() {}
 
-	Book(String title, String author, String yearPublished) {
+	Book(String title, String author, Long yearPublished) {
 		this.title = title;
 		this.author = author;
 		this.yearPublished = yearPublished;
@@ -35,14 +35,15 @@ class Book implements java.lang.Comparable<Book> {
 		return this.author;
 	}
 
-	public String getYearPublished() {
+	public Long getYearPublished() {
 		return this.yearPublished;
 	}
 
 	public String getSortKey() {
-	    String key = this.title + " " + this.author + " " + this.yearPublished;
+	    String key = this.title + " " + this.author + " " + this.yearPublished.toString();
 	    return key;
 	}
+	
 	public void setId(Long id) {
 		this.id = id;
 	}
@@ -55,7 +56,7 @@ class Book implements java.lang.Comparable<Book> {
 		this.author = author;
 	}
 
-	public void setYearPublished(String yearPublished) {
+	public void setYearPublished(Long yearPublished) {
 		this.yearPublished = yearPublished;
 	}
 
@@ -82,7 +83,7 @@ class Book implements java.lang.Comparable<Book> {
 	@Override
 	public String toString() {
 		return "Book{id=" + this.id + ", title='" + this.title + "', author='" + this.author
-			+ "', yearPublished='" + this.yearPublished + "'" + "}";
+			+ "', yearPublished='" + this.yearPublished.toString() + "'" + "}";
 	}
 
 	public JSONObject toJSON() {
@@ -98,7 +99,4 @@ class Book implements java.lang.Comparable<Book> {
 	public int compareTo(Book b2) {
         return this.getSortKey().compareTo(b2.getSortKey());
 	}
-	
 }
-
-
