@@ -1,5 +1,8 @@
+# Add args at the beginning
+ARG BASE_IMAGE=openjdk:8-jdk-alpine
+
 # Uses Open JDK as base image, the tag '8-jdk-alpine' denotes the "version" we are using
-FROM openjdk:8-jdk-alpine
+FROM ${BASE_IMAGE}
 
 # Set the working directory inside the container when run, here it is root
 WORKDIR /
